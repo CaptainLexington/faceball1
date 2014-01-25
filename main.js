@@ -19,38 +19,47 @@ window.onload = function(){
 		var engine = new BABYLON.Engine(canvas,true);
 		engine.isPointerLock=true;
 		engine.switchFullscreen(true);
-		scene = createScene(engine);
-		scene.activeCamera.keysUp.push(87);
-		scene.activeCamera.keysDown.push(83);
-		scene.activeCamera.keysLeft.push(65);
-		scene.activeCamera.keysRight.push(68);
-		scene.activeCamera.attachControl(canvas);
 		engine.switchFullscreen(true);
-		var conversation = null;
-		var convPartner = null;
-		var isSound = false;
-		var emoState = createEmoState();
-		engine.runRenderLoop(function() {
-			scene.render();
-			if (!isSound){
-				if (conversation != null){
-					//run the conversation
-				} else {
-					//check for conversation partners
-					convPartner = checkConvPartners();
-					if (convPartner != null){
-						window.alert("Found one");
-						conversation = makeConversation(convPartner);
-					}
-				}
-			} else {
-				//check for premature end of conversation
-			}
-		});
-
 		window.addEventListener("resize", function() {
 			engine.resize();
 		});
+		BABYLON.SceneLoader.Load("", "./assets/models/lukeshouse.babylon",engine, function (scene) {
+			scene.executeWhenReady(function() {
+				initializeScene(scene);
+				scene.activeCamera.keysUp.push(87);
+				scene.activeCamera.keysDown.push(83);
+				scene.activeCamera.keysLeft.push(65);
+				scene.activeCamera.keysRight.push(68);
+				scene.activeCamera.attachControl(canvas);
+			
+
+				var conversation = null;
+				var convPartner = null;
+				var isSound = false;
+				var emoState = createEmoState();
+
+				engine.runRenderLoop(function() {
+					scene.render();
+					if (!isSound){
+						if (conversation != null){
+							//TODO:run the conversation
+						} else {
+							//check for conversation partners
+							convPartner = checkConvPartners();
+							if (convPartner != null){
+								window.alert("Found one");
+								conversation = makeConversation(convPartner);
+							}
+						}
+					} else {
+					//TODO:check for premature end of conversation
+					}
+				});
+			});
+		}, function(progress){
+			//TODO: give progress feedback to user
+		});
+
 
 	}
 }
