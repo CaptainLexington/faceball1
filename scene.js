@@ -2,11 +2,13 @@ function createScene(engine){
 	var scene = new BABYLON.Scene(engine);
 	scene.gravity = new BABYLON.Vector3(0,-9.81, 0);
 	scene.collisionsEnabled = true;
-	var camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0,10,0), scene);
+	var camera = new BABYLON.FreeCamera("Camera", new BABYLON.Vector3(0,10,-25), scene);
 	camera.applyGravity=true;
 	camera.checkCollisions=true;
 	camera.ellipsoid = new BABYLON.Vector3 (1,2,1);
 	var light0 = new BABYLON.HemisphericLight("hemi0", new BABYLON.Vector3(0,1,0), scene);
+	var dirLight = new BABYLON.DirectionalLight("dir0", new BABYLON.Vector3(0,-1,0),scene);
+	dirLight.position = new BABYLON.Vector3(0,5,-5);
 	window.camera = camera;
 	var people = new Array();
 	for (var i=0; i<5; i++){
