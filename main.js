@@ -20,46 +20,26 @@ window.onload = function(){
 		engine.isPointerLock=true;
 		engine.switchFullscreen(true);
 		engine.switchFullscreen(true);
-		window.addEventListener("resize", function() {
-			engine.resize();
-		});
-		BABYLON.SceneLoader.Load("", "./assets/models/lukeshouse.babylon",engine, function (scene) {
-			scene.executeWhenReady(function() {
-				initializeScene(scene);
-				scene.activeCamera.keysUp.push(87);
-				scene.activeCamera.keysDown.push(83);
-				scene.activeCamera.keysLeft.push(65);
-				scene.activeCamera.keysRight.push(68);
-				scene.activeCamera.attachControl(canvas);
-			
-
-				var conversation = null;
-				var convPartner = null;
-				var isSound = false;
-				var emoState = createEmoState();
-
-				engine.runRenderLoop(function() {
-					scene.render();
-					if (!isSound){
-						if (conversation != null){
-							//TODO:run the conversation
-						} else {
-							//check for conversation partners
-							convPartner = checkConvPartners();
-							if (convPartner != null){
-								window.alert("Found one");
-								conversation = makeConversation(convPartner);
-							}
-						}
-					} else {
-					//TODO:check for premature end of conversation
+		var conversation = null;
+		var convPartner = null;
+		var isSound = false;
+		var emoState = createEmoState();
+		engine.runRenderLoop(function() {
+			scene.render();
+			if (!isSound){
+				if (conversation != null){
+					//run the conversation
+				} else {
+					//check for conversation partners
+					convPartner = checkConvPartners();
+					if (convPartner != null){
+						//window.alert("Found one");
+						conversation = makeConversation(convPartner);
 					}
-				});
-			});
-		}, function(progress){
-			//TODO: give progress feedback to user
+				}
+			} else {
+				//check for premature end of conversation
+			}
 		});
-
-
 	}
 }
