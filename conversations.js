@@ -4,12 +4,16 @@ function createEmoState(){
 }
 
 function checkConvPartners(){
-	for (var i=0; i<5; i++){
-		if (distance(window.camera.position,window.people[i].position)<3){
+	for (var i=0; i<9; i++){
+		if (distance(window.camera.position,window.people[i].position)<5){
 			return window.people[i];
 		}
 	}
 	return null;
+}
+
+function convPrematureEnd(convPartner){
+	return distance(window.camera.position,convPartner.position)>10;
 }
 
 function distance(pos1, pos2){

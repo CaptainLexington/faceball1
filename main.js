@@ -22,7 +22,7 @@ window.onload = function(){
 		engine.switchFullscreen(true);
 		var conversation = null;
 		var convPartner = null;
-		var isSound = false;
+		var isTalking = false;
 		var emoState = createEmoState();
         var scene = createScene(engine);
         scene.activeCamera.keysUp.push(87);
@@ -32,19 +32,23 @@ window.onload = function(){
         scene.activeCamera.attachControl(canvas);
 		engine.runRenderLoop(function() {
 			scene.render();
-			if (!isSound){
+			if (!isTalking){
 				if (conversation != null){
 					//run the conversation
+					conversation.run();
+					if (convPrematureEnd(convPartner)){
+						window.alert("Bye");
+						convPartner=null;
+						conversation=null;
+					}
 				} else {
 					//check for conversation partners
-					//convPartner = checkConvPartners();
+					convPartner = checkConvPartners();
 					if (convPartner != null){
-						//window.alert("Found one");
-						//conversation = makeConversation(convPartner);
+						window.alert("Hi");
+						conversation = makeConversation(convPartner);
 					}
 				}
-			} else {
-				//check for premature end of conversation
 			}
 		});
 
