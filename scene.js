@@ -10,14 +10,14 @@ function createScene(engine){
 	//var dirLight = new BABYLON.DirectionalLight("dir0", new BABYLON.Vector3(0,-1,0),scene);
 	//dirLight.position = new BABYLON.Vector3(0,5,-5);
 	window.camera = camera;
-	var people = new Array();
+	/*var people = new Array();
 	for (var i=0; i<5; i++){
 		people[i] = BABYLON.Mesh.CreateSphere("person_"+i, 10.0, 3.0, scene); 
 		people[i].position= new BABYLON.Vector3(10*i-20, 0, 0);
 		people[i].checkCollisions=true;
 	}
 	window.people = people;
-	
+	*/
 
 	//build the house:
 	var floorMat = new BABYLON.StandardMaterial("floorMat",scene);
