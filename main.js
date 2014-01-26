@@ -39,7 +39,7 @@ window.onload = function(){
 					//check for conversation partners
 					convPartner = checkConvPartners();
 					if (convPartner != null){
-						window.alert("Found one");
+						//window.alert("Found one");
 						conversation = makeConversation(convPartner);
 					}
 				}
