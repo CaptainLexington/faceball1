@@ -19,12 +19,6 @@ window.onload = function(){
 		var engine = new BABYLON.Engine(canvas,true);
 		engine.isPointerLock=true;
 		engine.switchFullscreen(true);
-		scene = createScene(engine);
-		scene.activeCamera.keysUp.push(87);
-		scene.activeCamera.keysDown.push(83);
-		scene.activeCamera.keysLeft.push(65);
-		scene.activeCamera.keysRight.push(68);
-		scene.activeCamera.attachControl(canvas);
 		engine.switchFullscreen(true);
 		var conversation = null;
 		var convPartner = null;
@@ -47,10 +41,5 @@ window.onload = function(){
 				//check for premature end of conversation
 			}
 		});
-
-		window.addEventListener("resize", function() {
-			engine.resize();
-		});
-
 	}
 }
