@@ -5,7 +5,7 @@ function createEmoState(){
 
 function checkConvPartners(){
 	for (var i=0; i<9; i++){
-		if (distance(window.camera.position,window.people[i].position)<5){
+		if (distance(window.camera.position,window.people[i].position)<4){
 			return window.people[i];
 		}
 	}
