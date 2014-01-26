@@ -24,6 +24,12 @@ window.onload = function(){
 		var convPartner = null;
 		var isSound = false;
 		var emoState = createEmoState();
+        var scene = createScene(engine);
+        scene.activeCamera.keysUp.push(87);
+        scene.activeCamera.keysDown.push(83);
+        scene.activeCamera.keysLeft.push(65);
+        scene.activeCamera.keysRight.push(68);
+        scene.activeCamera.attachControl(canvas);
 		engine.runRenderLoop(function() {
 			scene.render();
 			if (!isSound){
@@ -31,15 +37,20 @@ window.onload = function(){
 					//run the conversation
 				} else {
 					//check for conversation partners
-					convPartner = checkConvPartners();
+					//convPartner = checkConvPartners();
 					if (convPartner != null){
 						//window.alert("Found one");
-						conversation = makeConversation(convPartner);
+						//conversation = makeConversation(convPartner);
 					}
 				}
 			} else {
 				//check for premature end of conversation
 			}
 		});
+
+		window.addEventListener("resize", function() {
+            engine.resize();
+        });
+
 	}
 }

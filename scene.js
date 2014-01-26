@@ -7,8 +7,8 @@ function createScene(engine){
 	camera.checkCollisions=true;
 	camera.ellipsoid = new BABYLON.Vector3 (1,2,1);
 	var light0 = new BABYLON.HemisphericLight("hemi0", new BABYLON.Vector3(0,1,0), scene);
-	var dirLight = new BABYLON.DirectionalLight("dir0", new BABYLON.Vector3(0,-1,0),scene);
-	dirLight.position = new BABYLON.Vector3(0,5,-5);
+	//var dirLight = new BABYLON.DirectionalLight("dir0", new BABYLON.Vector3(0,-1,0),scene);
+	//dirLight.position = new BABYLON.Vector3(0,5,-5);
 	window.camera = camera;
 	var people = new Array();
 	for (var i=0; i<5; i++){
