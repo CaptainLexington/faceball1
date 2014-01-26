@@ -1,5 +1,6 @@
 window.onload = function(){
 	var canvas = document.getElementById("canvas");
+	var messageBox = document.getElementById("words");
 	function requestFullScreen() {
 		if (canvas.requestFullscreen){
 			canvas.requestFullscreen();
@@ -9,8 +10,11 @@ window.onload = function(){
 			canvas.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 		} else {}
 	}
+    canvas.requestPointerLock = canvas.requestPointerLock ||
+        canvas.mozRequestPointerLock ||
+        canvas.webkitRequestPointerLock;
 	canvas.addEventListener("click", function () {
-		requestFullScreen();
+		canvas.requestPointerLock();
 	}, false);
 
 	if (!BABYLON.Engine.isSupported()){
@@ -20,46 +24,41 @@ window.onload = function(){
 		engine.isPointerLock=true;
 		engine.switchFullscreen(true);
 		engine.switchFullscreen(true);
-		window.addEventListener("resize", function() {
-			engine.resize();
-		});
-		BABYLON.SceneLoader.Load("", "./assets/models/lukeshouse.babylon",engine, function (scene) {
-			scene.executeWhenReady(function() {
-				initializeScene(scene);
-				scene.activeCamera.keysUp.push(87);
-				scene.activeCamera.keysDown.push(83);
-				scene.activeCamera.keysLeft.push(65);
-				scene.activeCamera.keysRight.push(68);
-				scene.activeCamera.attachControl(canvas);
-			
-
-				var conversation = null;
-				var convPartner = null;
-				var isSound = false;
-				var emoState = createEmoState();
-
-				engine.runRenderLoop(function() {
-					scene.render();
-					if (!isSound){
-						if (conversation != null){
-							//TODO:run the conversation
-						} else {
-							//check for conversation partners
-							convPartner = checkConvPartners();
-							if (convPartner != null){
-								window.alert("Found one");
-								conversation = makeConversation(convPartner);
-							}
-						}
-					} else {
-					//TODO:check for premature end of conversation
+		var conversation = null;
+		var convPartner = null;
+		var isTalking = false;
+		var emoState = createEmoState();
+        var scene = createScene(engine);
+        scene.activeCamera.keysUp.push(87);
+        scene.activeCamera.keysDown.push(83);
+        scene.activeCamera.keysLeft.push(65);
+        scene.activeCamera.keysRight.push(68);
+        scene.activeCamera.attachControl(canvas);
+		engine.runRenderLoop(function() {
+			scene.render();
+			if (!isTalking){
+				if (conversation != null){
+					//run the conversation
+					conversation.run();
+					if (convPrematureEnd(convPartner)){
+						messageBox.textContent = convPartner.name+": Bye";
+						convPartner=null;
+						conversation=null;
 					}
-				});
-			});
-		}, function(progress){
-			//TODO: give progress feedback to user
+				} else {
+					//check for conversation partners
+					convPartner = checkConvPartners();
+					if (convPartner != null){
+						messageBox.textContent = convPartner.name+": Hi";
+						conversation = makeConversation(convPartner);
+					}
+				}
+			}
 		});
 
+		window.addEventListener("resize", function() {
+            engine.resize();
+        });
 
 	}
 }
