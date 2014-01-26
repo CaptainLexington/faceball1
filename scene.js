@@ -16,61 +16,55 @@ function createScene(engine){
 	var wunk = BABYLON.Mesh.CreateSphere("wunk",5.0,4.0,scene);
 	wunk.position = new BABYLON.Vector3(10,2,-5);
 	wunk.checkCollisions = true;
-	wunk.name = "wunk";	
+	wunk.name = "Wunk";	
 	people[0]=wunk;
 
 	var terliggidy = BABYLON.Mesh.CreateSphere("terliggidy",5.0,4.0,scene);
 	terliggidy.position = new BABYLON.Vector3(-12,2,-5);
 	terliggidy.checkCollisions = true;
-	terliggidy.name = "terliggidy";
+	terliggidy.name = "Terliggidy";
 	people[1]=terliggidy;
 
 	var wumpy = BABYLON.Mesh.CreateSphere("wumpy",5.0,4.0,scene);
 	wumpy.position = new BABYLON.Vector3(7,2,-20);
 	wumpy.checkCollisions = true;
-	wumpy.name="wumpy";
-/*	var spriteManagerWumpy=new BABYLON.SpriteManager("wumpyManager","./assets/names/wumpy.png",1,400,scene);
-	var wumpyName = new BABYLON.Sprite("wumpy",spriteManagerWumpy);
-	wumpyName.position.x = wumpy.position.x;
-	wumpyName.position.z = wumpy.position.z;
-	wumpyName.position.y = 5;
-	wumpyName.size = 10;*/
+	wumpy.name="Wumpy";
 	people[2]=wumpy;
 
 	var snoopler = BABYLON.Mesh.CreateSphere("snoopler",6.0,4.0,scene);
 	snoopler.position = new BABYLON.Vector3(0,2,-14);
 	snoopler.checkCollisions = true;
-	snoopler.name="snoopler";
+	snoopler.name="Snoopler";
 	people[3]=snoopler;
 
 	var lepsis = BABYLON.Mesh.CreateSphere("lepsis",5.0,4.0,scene);
 	lepsis.position = new BABYLON.Vector3(-10,2,5);
 	lepsis.checkCollisions = true;
-	lepsis.name = "lepsis";
+	lepsis.name = "Lepsis";
 	people[4]=lepsis;
 
 	var kelery = BABYLON.Mesh.CreateSphere("kelery",5.0,4.0,scene);
 	kelery.position = new BABYLON.Vector3(10,2,15);
 	kelery.checkCollisions = true;
-	kelery.name = "kelery";
+	kelery.name = "Kelery";
 	people[5]=kelery;
 
 	var cho_bunbo = BABYLON.Mesh.CreateSphere("cho_bunbo",5.0,4.0,scene);
 	cho_bunbo.position = new BABYLON.Vector3(0,2,25);
 	cho_bunbo.checkCollisions = true;
-	cho_bunbo.name = "cho_bunbo";
+	cho_bunbo.name = "Cho Bunbo";
 	people[6]=cho_bunbo;
 
 	var feebus = BABYLON.Mesh.CreateSphere("feebus",5.0,4.0,scene);
 	feebus.position = new BABYLON.Vector3(-8,2,18);
 	feebus.checkCollisions = true;
-	feebus.name = "feebus";
+	feebus.name = "Chorming Feebus";
 	people[7]=feebus;
 
 	var lazbon = BABYLON.Mesh.CreateSphere("lazbon",5.0,4.0,scene);
 	lazbon.position = new BABYLON.Vector3(7,2,20);
 	lazbon.checkCollisions = true;
-	lazbon.name = "lazbon";
+	lazbon.name = "Lazbon";
 	people[8]=lazbon;
 
 	for (i = 0; i<people.length; i++){

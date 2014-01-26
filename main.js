@@ -1,5 +1,6 @@
 window.onload = function(){
 	var canvas = document.getElementById("canvas");
+	var messageBox = document.getElementById("words");
 	function requestFullScreen() {
 		if (canvas.requestFullscreen){
 			canvas.requestFullscreen();
@@ -9,8 +10,11 @@ window.onload = function(){
 			canvas.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
 		} else {}
 	}
+    canvas.requestPointerLock = canvas.requestPointerLock ||
+        canvas.mozRequestPointerLock ||
+        canvas.webkitRequestPointerLock;
 	canvas.addEventListener("click", function () {
-		requestFullScreen();
+		canvas.requestPointerLock();
 	}, false);
 
 	if (!BABYLON.Engine.isSupported()){
@@ -37,7 +41,7 @@ window.onload = function(){
 					//run the conversation
 					conversation.run();
 					if (convPrematureEnd(convPartner)){
-						window.alert("Bye");
+						messageBox.textContent = convPartner.name+": Bye";
 						convPartner=null;
 						conversation=null;
 					}
@@ -45,7 +49,7 @@ window.onload = function(){
 					//check for conversation partners
 					convPartner = checkConvPartners();
 					if (convPartner != null){
-						window.alert("Hi");
+						messageBox.textContent = convPartner.name+": Hi";
 						conversation = makeConversation(convPartner);
 					}
 				}
